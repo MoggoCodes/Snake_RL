@@ -1,0 +1,15 @@
+[workspace]
+authors = ["Amogh Agarwal <amoghagarwal2000@gmail.com>"]
+channels = ["conda-forge"]
+name = "snake_rl"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+test = "python test.py"
+snake = "python snake_game.py"
+
+[dependencies]
+python = ">=3.13.3,<3.14"
+pygame = ">=2.6.1,<3"
+numpy = ">=2.2.6,<3"
