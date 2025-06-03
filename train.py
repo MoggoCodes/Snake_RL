@@ -38,9 +38,16 @@ def train(n_episodes=1000, max_steps=1000):
     try:
         env = SnakeEnv()
         
-        # Use CUDA if available
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        print(f"Using device: {device}")
+        # Device selection prioritizing Apple Metal
+        if torch.backends.mps.is_available():
+            device = torch.device("mps")
+            print("Using Apple Metal GPU acceleration")
+        elif torch.cuda.is_available():
+            device = torch.device("cuda")
+            print("Using CUDA GPU acceleration")
+        else:
+            device = torch.device("cpu")
+            print("Using CPU")
         
         # Initialize agent
         state_shape = env.observation_space.shape
